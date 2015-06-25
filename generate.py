@@ -22,20 +22,22 @@ def cloud_anim():
     WW=956
     HH=375
     animStep=20
-    startOffset=-500
+    startOffset=450
     
     imgList=[]
-    for ii in range(0,WW, animStep):
+    ipos=0
+    for ii in range(0-startOffset, WW+startOffset, animStep):
         ims = cairo.ImageSurface(cairo.FORMAT_ARGB32, WW, HH)
         cr=cairo.Context(ims)
 
-        cr.set_source_rgb(200,200,200)
+        cr.set_source_rgb(220,220,200)
         cr.select_font_face("Sans", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
         cr.set_font_size(100)
 
-        cr.move_to(ii+startOffset, int(HH/2.0))
+        cr.move_to(ii, int(HH/2.0))
         cr.show_text("Meteorology")
-        ims.write_to_png( "{0}_{1:04d}.png".format(outName, ii) )
+        ims.write_to_png( "{0}_{1:04d}.png".format(outName, ipos) )
+        ipos=ipos+1
 
     # do animation
     # convert -delay 20 -loop 0 -dispose Background anim_*.png animation.gif
